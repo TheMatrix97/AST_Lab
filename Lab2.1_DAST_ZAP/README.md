@@ -1,6 +1,6 @@
 # LAB 2.1 - Anàlisi d'APIs amb OWASP ZAP (DAST)
 
-En aquest laboratori veurem com analitzar dinàmicament APIs amb l'eina OWASP ZAP, aplicant les relges del [OWASP Top 10](https://owasp.org/www-project-top-ten/)
+En aquest laboratori veurem com analitzar dinàmicament APIs amb l'eina OWASP ZAP, aplicant les regles del [OWASP Top 10](https://owasp.org/www-project-top-ten/)
 
 Requisits:
 
