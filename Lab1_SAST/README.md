@@ -152,3 +152,22 @@ Consulta la següent documentació:
 - <https://semgrep.dev/docs/semgrep-ci/sample-ci-configs/>
 - <https://semgrep.dev/docs/cli-reference/>
 - <https://docs.github.com/en/code-security/code-scanning/integrating-with-code-scanning/uploading-a-sarif-file-to-github>
+
+# Neteja
+
+Neteja els recursos aixecats al lab:
+
+- Sonarqube
+
+```bash
+docker stop sonarqube
+docker rm sonarqube
+docker network rm sonar_network
+docker rmi sonarqube:10.4-community
+```
+
+- Semgrep
+
+```bash
+docker rmi returntocorp/semgrep
+```
