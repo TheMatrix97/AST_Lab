@@ -26,8 +26,9 @@ git clone https://github.com/<Usuari>/dotnet-6-crud-api.git
 ## SonarQube
 
 ```bash
+docker network create -d bridge sonar_network
 docker volume create sonar_data
-docker run -d --name sonarqube -p 9000:9000 -v sonar_data:/opt/sonarqube/data sonarqube
+docker run -d --name sonarqube -p 9000:9000 -v sonar_data:/opt/sonarqube/data --network sonar_network sonarqube:10.4-community
 ```
 
 A continuació, obrirem un navegador i accedirem a `http://localhost:9000`. On hauriem de veure la pantalla de login de SonarQube
@@ -80,13 +81,13 @@ Per aquest laboratori, farem servir una imatge Docker custom que inclou l'eina S
 
 Només haurem de substituir els següents paràmetres:
 
-- **$HOST**: `http://host.docker.internal:9000` -> (Host local)
+- **$HOST**: `http://sonarqube:9000` -> (Host local)
 - **$TOKEN**: `sqa_*` -> (Token d'autenticació que hem obtingut al pas anterior)
 - **$KEY**: `crud_api` -> (Identificador el projecte)
   
 ```bash
 cd dotnet-6-crud-api
-docker run -it --rm -v .:/source ghcr.io/thematrix97/dotnet-sonar:latest sh -c "cd source \
+docker run -it --rm --network sonar_network -v .:/source ghcr.io/thematrix97/dotnet-sonar:latest sh -c "cd source \
     && dotnet /sonar-scanner/SonarScanner.MSBuild.dll begin /k:$KEY /d:sonar.host.url=$HOST /d:sonar.login=$TOKEN \
     && dotnet restore \
     && dotnet build -c Release \
@@ -97,7 +98,7 @@ Si tot ha anat bé, hauriem de veure el següent output:
 
 ```txt
 ....
-INFO: More about the report processing at http://host.docker.internal:9000/api/ce/task?id=AYsaK9XcdZb1SavooNVE
+INFO: More about the report processing at http://sonarqube:9000/api/ce/task?id=AYsaK9XcdZb1SavooNVE
 INFO: Analysis total time: 14.143 s
 INFO: ------------------------------------------------------------------------
 INFO: EXECUTION SUCCESS
