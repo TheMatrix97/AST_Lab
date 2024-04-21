@@ -98,7 +98,7 @@ Aquesta petició ens hauria de tornar el seguent missatge
 Ara que tenim l'API en marxa, executarem l'escaneig automatic de OWASP ZAP fent servir la definició de la mateixa en OpenAPI (http://localhost:4000/swagger/v1/swagger.json).
 
 ```bash
-docker run --rm -t owasp/zap2docker-stable zap-api-scan.py -t http://host.docker.internal:4000/swagger/v1/swagger.json -f openapi
+docker run --rm -t ghcr.io/zaproxy/zaproxy:stable zap-api-scan.py -t http://host.docker.internal:4000/swagger/v1/swagger.json -f openapi
 ```
 
 Aquesta comanda ens hauria de tornar el següent resultat
